@@ -1,0 +1,93 @@
+﻿**********************
+Windows PowerShell 기록 시작
+시작 시간: 20261105222955
+사용자 이름: GNIA\been0014758034
+RunAs 사용자: GNIA\been0014758034
+구성 이름: 
+Machine: GNIA-C202-B04 (Microsoft Windows NT 10.0.26300.0)
+호스트 응용 프로그램: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+프로세스 ID: 23120
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+기록이 시작되었습니다. 출력 파일은 C:\Users\been0014758034\codyssey\mission-log.txt입니다.
+PS C:\Windows\system32> cd "$home\codyssey"
+PS C:\Users\been0014758034\codyssey> mkdir site
+
+
+    디렉터리: C:\Users\been0014758034\codyssey
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----      2026-11-05  오후 10:31                site
+
+
+PS C:\Users\been0014758034\codyssey> set-content -path .\site\index.html -value '<h1>hello, codyssey!</h1>' -encoding utf8
+PS C:\Users\been0014758034\codyssey> cat .\site\index.html
+<h1>hello, codyssey!</h1>
+PS C:\Users\been0014758034\codyssey> Set-Content -Path Dockerfile -Value 'FROM nginx:alpine' -Encoding ascii
+PS C:\Users\been0014758034\codyssey> Add-Content -Path Dockerfile -Value 'COPY site/ /usr/share/nginx/html/' -Encoding ascii
+PS C:\Users\been0014758034\codyssey> cat Dockerfile
+FROM nginx:alpine
+COPY site/ /usr/share/nginx/html/
+PS C:\Users\been0014758034\codyssey> docker build -t codyssey-web:1.0 .
+
+PS C:\Users\been0014758034\codyssey> docker run -d --name codyssey-web -p 8080:80 codyssey-web:1.0
+
+PS C:\Users\been0014758034\codyssey> http://localhost:8080
+http://localhost:8080 : 'http://localhost:8080' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경
+로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오.
+위치 줄:1 문자:1
++ http://localhost:8080
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (http://localhost:8080:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+http://localhost:8080 : 'http://localhost:8080' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으
+로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오.
+위치 줄:1 문자:1
++ http://localhost:8080
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (http://localhost:8080:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\been0014758034\codyssey> explorer .
+PS C:\Users\been0014758034\codyssey> Set-Content -Path .\site\index.html -Value '<h1>Updated page!</h1>' -Encoding utf8
+PS C:\Users\been0014758034\codyssey> docker run -d --name codyssey-bind -p 8081:80 --mount "type=bind,source=$($PWD.Path)\site,target=/usr/share/nginx/html,readonly" codyssey-web:1.0
+
+PS C:\Users\been0014758034\codyssey> Set-Content -Path .\site\index.html -Value '<h1>Bind mount works!</h1>' -Encoding utf8
+PS C:\Users\been0014758034\codyssey> docker volume create codyssey-data
+
+PS C:\Users\been0014758034\codyssey> docker run --name volume-write --mount type=volume,source=codyssey-data,target=/data ubuntu:24.04 bash -c "echo persistent-data > /data/hello.txt; cat /data/hello.txt"
+
+PS C:\Users\been0014758034\codyssey> docker rm volume-write
+
+PS C:\Users\been0014758034\codyssey> docker run --rm --mount type=volume,source=codyssey-data,target=/data ubuntu:24.04 cat /data/hello.txt
+
+PS C:\Users\been0014758034\codyssey> docker stats --no-stream codyssey-web
+
+PS C:\Users\been0014758034\codyssey> docker logs codyssey-web
+
+PS C:\Users\been0014758034\codyssey> git config --get user.name
+
+PS C:\Users\been0014758034\codyssey> git init -b main
+
+PS C:\Users\been0014758034\codyssey> git config --local user.name "THEO"
+
+PS C:\Users\been0014758034\codyssey> git config --local user.email "[이메일 가림]"
+
+PS C:\Users\been0014758034\codyssey> git config --local --list
+
+PS C:\Users\been0014758034\codyssey> notepad README.md
+PS C:\Users\been0014758034\codyssey> notepad README.md
+PS C:\Users\been0014758034\codyssey> Stop-Transcript
+**********************
+Windows PowerShell 기록 끝
+종료 시간: 20261105230241
+**********************
