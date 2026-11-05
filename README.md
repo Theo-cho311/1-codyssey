@@ -66,7 +66,7 @@
 
 \### 이미지에 복사한 웹페이지 — 8080
 
-!\[8080 웹페이지](hello,codyssey.png)
+!\[8080 웹페이지](web-8080.png)
 
 
 
@@ -271,4 +271,34 @@ persistent-data
 \- 결과: docker --version과 docker info가 정상 실행됐고,
 
 &#x20; hello-world 컨테이너에서 Hello from Docker!를 확인했다.
+
+
+
+\## 실행 기록
+
+
+
+\[PowerShell 명령 및 출력 기록 보기](mission-log.txt)
+
+
+
+기록은 Start-Transcript를 실행한 시점부터 저장했다.
+
+그 이전에 수행한 터미널 기본 조작, Linux 권한 변경 등의 출력은 이 파일에 포함되지 않는다.
+
+공개용 기록에서 이메일 주소는 가림 처리했다.
+
+
+
+\## VSCode와 GitHub 연동
+
+
+
+VSCode에서 과제 폴더를 열고 main 브랜치가 인식되는 것을 확인했다.
+
+계정 메뉴에서 본인의 GitHub 로그인 상태도 확인했다.
+
+
+
+!\[VSCode GitHub 연동 확인](vscode-github.png)
 
